@@ -42,9 +42,11 @@ var fightOrSkip = function() {
 
 // fight function (now with parameter for enemy's object holding name, health, and attack values)
 var fight = function (enemy) {
+    console.log("enemy:", enemy);
+    console.log("fightOrSkip", fightOrSkip());
     //repeat and execute as long as the enemy robot is alive
     while (playerInfo.health > 0 && enemy.health > 0) {
-        if (fightOrSkip){
+        if (fightOrSkip()){
             //if true, leave gith by breaking loop
             break;
         }
@@ -96,7 +98,7 @@ var fight = function (enemy) {
 var startGame = function () {
     // reset player stats
     playerInfo.reset();
-
+    console.log(playerInfo);
     // fight each enemy robot by looping over them and fighting them one at a time
     for (var i = 0; i < enemyInfo.length; i++) {
         // if player is still alive, keep fight next enemy
@@ -105,13 +107,13 @@ var startGame = function () {
             window.alert('Welcome to Robot Gladiators! Round ' + (i + 1));
 
 
-
+            
             // pick new enemy to fight based on the index of the enemyInfo array
             var pickedEnemyObj = enemyInfo[i];
 
             // set health for picked enemy
             pickedEnemyObj.health = randomNumber(40, 60);
-
+            console.log(pickedEnemyObj);
             // pass the pickedEnemyObj object variable's value into the fight function, where it will assume the value of the enemy parameter
             fight(pickedEnemyObj);
 
@@ -163,8 +165,12 @@ var endGame = function () {
 var shop = function () {
     // ask player what they'd like to do
     var shopOptionPrompt = window.prompt(
-        'Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one "REFILL", "UPGRADE", or "LEAVE" to make a choice.'
+        'Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter 1 for REFILL, 2 for UPGRADE, or 3 for LEAVE.'
     );
+
+    // change string to integer
+
+shopOptionPrompt = parseInt(shopOptionPrompt);
 
     // use switch case to carry out action
     switch (shopOptionPrompt) {
